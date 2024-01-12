@@ -522,13 +522,14 @@ if ( ! function_exists( 'shortcode_ntt_schedule' ) ) :
                                         
                                         }
                                         
+                                        
                                         function checkAndDisplayImage() {
-                                            // Lấy thời gian của tuần hiện tại
+                                            // time cua tuan hien tai
                                             var currentView = $("#<?php echo esc_attr($id)?>").fullCalendar('getView');
                                             var startOfWeek = currentView.start;
                                             var endOfWeek = currentView.end;
                                     
-                                            // Lấy tất cả sự kiện trong khoảng thời gian của tuần
+                                            // all su kien cua tuan
                                             var eventsInWeek = $("#<?php echo esc_attr($id)?>").fullCalendar('clientEvents', function(event) {
                                                 return event.start.isBetween(startOfWeek, endOfWeek, null, '[]') ||
                                                     event.end.isBetween(startOfWeek, endOfWeek, null, '[]');
@@ -536,7 +537,7 @@ if ( ! function_exists( 'shortcode_ntt_schedule' ) ) :
                                     
                                             
                                             if (eventsInWeek.length === 0) {
-                                                
+                                              
                                                 $('#<?php echo esc_attr($id)?>').find('img').remove();
                                                 
                                                 var imageUrl = 'https://zestforenglish.vn/wp-content/uploads/2024/01/no-event-zestforenglish.png';
@@ -545,9 +546,15 @@ if ( ! function_exists( 'shortcode_ntt_schedule' ) ) :
                                                     'background-repeat': 'no-repeat',
                                                      'width': '100%'
                                                 });
+                                                
+                                            }else {
+                                                
+                                                $('#<?php echo esc_attr($id)?>').find('img').remove();
+                                                $("#<?php echo esc_attr($id)?>").find('table').css('background', 'none');
+                                                
                                             }
                                         }
-                                        $('.fc-prev-button').on('click', function() {
+                                        $('.fc-prev-button,.fc-next-button').on('click', function() {
                                            
                                             checkAndDisplayImage();
                                             
